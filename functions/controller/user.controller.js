@@ -84,32 +84,9 @@ async function getUser(req, res, next) {
     }
 }
 
-async function updateUser(req, res, next) {
-    try {
-        await collectionRef.doc(req.body.idToUpdate)
-            .set({
-                ...req.body.newData
-            }, { merge: true });
-        return res.status(200).json({ success: true });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error });
-    }
-}
 
-async function deleteUser(req, res, next) {
-    try {
-        await collectionRef.doc(req.params.id).delete();
-        return res.status(200).json({ success: true });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error });
-    }
-}
 
 module.exports = {
     createUser,
-    getUser,
-    updateUser,
-    deleteUser
+    getUser
 }
