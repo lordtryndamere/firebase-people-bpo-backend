@@ -57,6 +57,9 @@ async function createUser(req, res, next) {
 
 
 
+
+
+
         return res.status(200).send({
             success: true,
             message: "User created succesfully!",
@@ -70,14 +73,11 @@ async function createUser(req, res, next) {
 
 async function getUser(req, res, next) {
     try {
-        let quierySnapshot = await collectionRef.where("id", "==", req.params.id).get();
-        let document = quierySnapshot.docs[0];
-        if (document) {
-            let user = document.data();
-            return res.status(200).json({ success: true, data: user });
-        } else {
-            return res.status(200).json({ success: false, message: "user does not exist" });
-        }
+        let userfinded = await   admin
+        .auth()
+        .getUserByEmail(req.params.email)
+
+        return res.status(200).json({ user: userfinded})
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error });

@@ -3,7 +3,7 @@ const userController = require("../controller/user.controller");
 
 router.post("/api/users/create", userController.createUser);
 
-router.get("/api/users/:id", userController.getUser);
+router.get("/api/users/:email", userController.getUser);
 
 router.put("/api/users/update", userController.updateUser);
 
